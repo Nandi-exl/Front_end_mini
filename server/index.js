@@ -6,8 +6,12 @@ const PORT = process.env.PORT;
 const bodyParser = require('body-parser');
 const cookieparser = require('cookie-parser');
 const cors = require('cors');
-const userRouter = require('./API/UserApi/UserRouter')
-const productRouter = require('./API/ProductApi/ProductRouter')
+const userRouter = require('./API/UserApi/UserRouter');
+const productRouter = require('./API/ProductApi/ProductRouter');
+
+//database
+require('./config/db');
+// require('./config/setup');
 
 app.use(bodyParser.json());
 app.use(cookieparser());
@@ -22,10 +26,13 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/', userRouter);
+app.use('/', productRouter);
 
-app.use('/', userRouter)
-app.use('/', productRouter)
-
-app.listen(PORT, () => {
-  console.log(`server is Running on port ${PORT}`);
-});
+try {
+  app.listen(PORT, () => {
+    console.log(`server is Running on port ${PORT}`);
+  });
+} catch (error) {
+  if (error) throw error;
+}

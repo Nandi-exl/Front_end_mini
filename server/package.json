@@ -18,14 +18,20 @@
   },
   "homepage": "https://github.com/Nandi-exl/Front_end_mini#readme",
   "dependencies": {
+    "3": "^2.1.0",
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
+    "fs": "^0.0.1-security",
     "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.3.3",
     "nodemon": "^2.0.15",
-    "sequelize": "^6.19.0"
+    "path": "^0.12.7",
+    "sequelize": "^6.19.0",
+    "sequelize-cli": "^6.4.1",
+    "sqlite": "^4.0.25"
   }
 }
