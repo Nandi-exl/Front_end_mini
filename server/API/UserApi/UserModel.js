@@ -1,6 +1,31 @@
 const { User } = require('../../config/setup');
 class UserModel {
   static async GetAllUser() {
+    const users = await User.findAll({
+      attributes: ['id', 'name', 'email', 'adress', 'phone_number'],
+    });
+    return new Promise((resolve, rejects) => {
+      resolve(users);
+    });
+  }
+
+  static async GetUserById(id) {
+    const user = await User.findAll(
+      {
+        where: {
+          id: id,
+        },
+      },
+      {
+        attributes: ['id', 'name', 'email', 'adress', 'phone_number'],
+      }
+    );
+    return new Promise((resolve, reject) => {
+      resolve(user);
+    });
+  }
+
+  static async GetAllUserToken() {
     const users = await User.findAll();
     return new Promise((resolve, rejects) => {
       resolve(users);
@@ -10,6 +35,7 @@ class UserModel {
   static async AddUser(data, hashPasword) {
     const addUser = await User.create({
       name: data.name,
+      email: data.email,
       password: hashPasword,
       adress: data.adress,
       phone_number: data.phone_number,
@@ -19,38 +45,41 @@ class UserModel {
     });
   }
 
-  static async UpdateUser(data, id) {
-    const update = await User.update({
-      name: data.name,
-      password: data.password,
-      adress: data.adress,
-      phone_number: data.phone_number,
-      
-    }, {
-      where : {
-        id : id
+  static async UpdateUser(data, id, hashedPassword) {
+    const update = await User.update(
+      {
+        name: data.name,
+        email: data.email,
+        password: hashedPassword,
+        adress: data.adress,
+        phone_number: data.phone_number,
+      },
+      {
+        where: {
+          id: id,
+        },
       }
-    });
+    );
     return new Promise((resolve, reject) => {
       resolve(update);
     });
   }
 
-  static async DeletUser(id){
+  static async DeletUser(id) {
     const deleteUser = await User.destroy({
-      where : {
-        id : id
-      }
-    })
-    new Promise ((resolve, reject) => {
-      resolve(deleteUser)
-    })
+      where: {
+        id: id,
+      },
+    });
+    new Promise((resolve, reject) => {
+      resolve(deleteUser);
+    });
   }
 
-  static async UserLogin(name) {
+  static async UserLogin(email) {
     const login = await User.findAll({
       where: {
-        name: name,
+        email: email,
       },
     });
     return new Promise((resolve, reject) => {
@@ -58,14 +87,14 @@ class UserModel {
     });
   }
 
-  static async PushRefreshToken(refreshToken, name) {
+  static async PushRefreshToken(refreshToken, email) {
     const push = await User.update(
       {
         refreshToken: refreshToken,
       },
       {
         where: {
-          name: name,
+          email: email,
         },
       }
     );
@@ -74,14 +103,14 @@ class UserModel {
     });
   }
 
-  static async RemoveRefreshToken(id) {
+  static async RemoveRefreshToken(email) {
     const remove = await User.update(
       {
         refreshToken: null,
       },
       {
         where: {
-          id: id,
+          email: email,
         },
       }
     );

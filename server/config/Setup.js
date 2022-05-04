@@ -12,6 +12,10 @@ const User = sequelize.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  email: {
+    type: Sequelize.TEXT,
+    allowNull: false,
+  },
   password: {
     type: Sequelize.TEXT,
     allowNull: false,
@@ -30,14 +34,14 @@ const User = sequelize.define('user', {
   },
 });
 
-sequelize
-  .sync({ force: false })
-  .then(() => {
-    console.log('table created');
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// sequelize
+//   .sync({ force: false })
+//   .then(() => {
+//     console.log('table created');
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 module.exports = {
   User,
