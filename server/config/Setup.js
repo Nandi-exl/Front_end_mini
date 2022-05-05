@@ -34,6 +34,27 @@ const User = sequelize.define('user', {
   },
 });
 
+const Product = sequelize.define('product', {
+  id : {
+    type : Sequelize.INTEGER,
+    autoIncrement : true,
+    allowNull : false, 
+    primaryKey : true,
+  },
+  name : {
+    type : Sequelize.STRING,
+    allowNull : false   
+  },
+  quantity : {
+    type : Sequelize.INTEGER,
+    allowNull : true
+  },
+  price : {
+    type : Sequelize.INTEGER,
+    allowNull : false
+  },
+})
+
 // sequelize
 //   .sync({ force: false })
 //   .then(() => {
@@ -44,5 +65,5 @@ const User = sequelize.define('user', {
 //   });
 
 module.exports = {
-  User,
+  User, Product
 };

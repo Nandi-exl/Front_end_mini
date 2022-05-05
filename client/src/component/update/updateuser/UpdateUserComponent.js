@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { Form, Button, Card, Spinner, Alert } from 'react-bootstrap';
 import { updateUser } from '../../../api/userApi';
-import { fetchAllUser } from '../../usercomponent/userAction';
+// import { fetchAllUser } from '../../usercomponent/userAction';
 
 const UpdateUserComponent = () => {
   const { isLoading, user, error } = useSelector((state) => state.userDetail);
@@ -13,7 +13,6 @@ const UpdateUserComponent = () => {
   const [adress, setAdress] = useState(user[0].adress);
   const [phone_number, setPhone_number] = useState();
 
-  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSubmit = () => {
@@ -22,7 +21,7 @@ const UpdateUserComponent = () => {
     // dispatch(fetchAllUser()); //harus mencari cara untuk fecth token tampa login
 
     //untuk reload ketika menuju page tampa refreshtoken
-     window.location.reload();
+    window.location.reload();
   };
 
   const handleOnChange = (e) => {

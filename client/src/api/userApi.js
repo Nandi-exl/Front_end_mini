@@ -1,29 +1,14 @@
 import axios from 'axios';
-import jwtDecode from 'jwt-decode';
+import { refreshToken } from './refreshToken';
 
 const rootUrl = 'http://localhost:5000';
 const loginUrl = rootUrl + '/login';
 const logOutUrl = rootUrl + '/logout';
-const rToken = rootUrl + '/refresh_token';
 const users = rootUrl + '/users';
 const registerUrl = rootUrl + '/register';
 
 //axios interceptor so the token will no need tp refresh
 
-const refreshToken = () => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const response = await axios.get(rToken, {
-        withCredentials: true,
-      });
-      const token = response.data.accessToken;
-      return resolve(token);
-      return;
-    } catch (error) {
-      return reject(error);
-    }
-  });
-};
 
 export const getAllUser = () => {
   return new Promise(async (resolve, reject) => {

@@ -13,10 +13,10 @@ const createRefreshToken = (id, name, email) => {
 };
 
 const sendAccessToken = (req, res, accestoken) => {
-  res.cookie('accesstoken', accestoken, {
-    httpOnly: true,
-    path: '/',
-  });
+  // res.cookie('accesstoken', accestoken, {
+  //   httpOnly: true,
+  //   path: '/',
+  // });
   res.send({
     accestoken,
     email: req.body.email,

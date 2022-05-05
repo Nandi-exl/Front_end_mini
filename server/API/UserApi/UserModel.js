@@ -25,6 +25,7 @@ class UserModel {
     });
   }
 
+  //this is for validation of refreshtoken because in get All user i dont include the info of refresh token
   static async GetAllUserToken() {
     const users = await User.findAll();
     return new Promise((resolve, rejects) => {

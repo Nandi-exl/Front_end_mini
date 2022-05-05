@@ -3,15 +3,16 @@ import { useEffect } from 'react';
 import { fetchAllUser } from './userAction';
 import { deleteUser } from '../../api/userApi';
 import { getUserDetailAction } from './userdetail/UserDetailAction';
-// import { getUserById } from '../../api/userApi';
+import ProductAdmin from '../productcomponent/adminproduct/GetProductAdminComponent';
 
 import { useNavigate } from 'react-router-dom';
 const UserData = () => {
-  const { users, isLoading, error } = useSelector((state) => state.user);
+  const { users, isLoading } = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
+
   useEffect(() => {
-    dispatch(fetchAllUser());
+     dispatch(fetchAllUser());
   }, [dispatch]);
   const navigate = useNavigate();
 
@@ -37,8 +38,13 @@ const UserData = () => {
           </div>
         </>
       ))}
-
-      {error && <p></p>}
+      <a href='/admin_products'>
+        <button style={{ marginTop: '1rem' }}>Check Products</button>
+      </a>
+      {/* <ProductAdmin />
+      <a href='/add_product'>
+        <button>add product</button>
+      </a> */}
     </>
   );
 };

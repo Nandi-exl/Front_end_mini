@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Form, Button, Card, Spinner, Alert } from 'react-bootstrap';
 
 const RegisterUser = () => {
-  const { isLoading, error } = useSelector(
-    (state) => state.register
-  );
+  const { isLoading, error } = useSelector((state) => state.register);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -46,7 +44,7 @@ const RegisterUser = () => {
     dispatch(
       registerUserAction({ name, email, password, adress, phone_number })
     );
-    navigate('/');
+    navigate('/login');
   };
 
   return (
@@ -117,9 +115,6 @@ const RegisterUser = () => {
               value={phone_number}
               required
             />
-          </Form.Group>
-          <Form.Group className='mb-3' controlId='formBasicCheckbox'>
-            <Form.Check type='checkbox' label='Check me out' />
           </Form.Group>
           <Button variant='primary' type='submit'>
             Submit
